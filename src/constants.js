@@ -11,3 +11,4 @@ export const NAV_ITEMS = {
   [PAGE_ACTIVITIES]: ListBulletIcon,
   [PAGE_PROGRESS]: ChartBarIcon
 }
+

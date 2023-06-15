@@ -6,14 +6,14 @@
 </template>
 
 <script setup>
-import { isTimelineValid } from '../validators'
+import { isTimelineItemValid } from '../validators'
 import BaseSelect from '@/components/BaseSelect.vue'
 
 const props = defineProps({
   timelineItem: {
     required: true,
     type: Object,
-    validator: isTimelineValid
+    validator: isTimelineItemValid
   }
 })
 
