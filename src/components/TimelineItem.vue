@@ -6,16 +6,14 @@
 </template>
 
 <script setup>
-import { HOURS_IN_DAY } from '@/constants'
+import { isTimelineValid } from '../validators'
 import BaseSelect from '@/components/BaseSelect.vue'
 
 const props = defineProps({
   timelineItem: {
     required: true,
     type: Object,
-    validator(hour) {
-      return typeof hour === 'number' && hour >= 0 && hour < HOURS_IN_DAY
-    }
+    validator: isTimelineValid
   }
 })
 
