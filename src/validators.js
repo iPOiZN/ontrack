@@ -42,6 +42,10 @@ function isNotEmptyString(value) {
 export function isHourValid(hour) {
   return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY - 1)
 }
+
+export function isUndefined(value) {
+  return value === undefined
+}
 function isSelectOptionValid({ value, label }) {
   return isNumber(value) && isNotEmptyString(label)
 }
@@ -56,9 +60,6 @@ function isString(value) {
 
 function isNumber(value) {
   return typeof value === 'number'
-}
-function isUndefined(value) {
-  return value === undefined
 }
 
 function isNull(value) {
