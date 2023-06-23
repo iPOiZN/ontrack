@@ -7,7 +7,7 @@
     <input
       type="text"
       v-model="activity"
-      class="w-full rounded border px-4 text-xl"
+      class="w-full rounded border px-4 text-xl focus:outline-[#6B62FF]"
       placeholder="Activity name"
     />
     <BaseButton :disabled="activity.trim() === ''">
