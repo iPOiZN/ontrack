@@ -1,21 +1,20 @@
 <template>
   <div class="flex gap-2">
-    <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="$emit('select', null)">
+    <BaseButton :type="BUTTON_TYPE_NEUTRAL"
+                @click="select(null)">
       <XMarkIcon class="h-8" />
     </BaseButton>
-    <select
-      class="w-full truncate rounded bg-gray-100 px-2 py-1 text-2xl focus:outline-purple-400"
-      @change="emit('select', +$event.target.value)"
-    >
-      <option :selected="isNotSelected" disabled value="">
+    <select class="w-full truncate rounded bg-gray-100 px-2 py-1 text-2xl focus:outline-purple-400"
+            @change="select($event.target.value)">
+      <option :selected="isNotSelected"
+              disabled
+              value="">
         {{ placeholder }}
       </option>
-      <option
-        v-for="{ value, label } in options"
-        :key="value"
-        :value="value"
-        :selected="value === selected"
-      >
+      <option v-for="{ value, label } in options"
+              :key="value"
+              :value="value"
+              :selected="value === selected">
         {{ label }}
       </option>
     </select>
@@ -26,12 +25,13 @@
 import { computed } from 'vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { BUTTON_TYPE_NEUTRAL } from '../constants'
-import { validateSelectOptions, isUndefinedOrNull, isNumberOrNull } from '@/validators'
+import { normalizeSelectValue } from '@/functions'
+import { validateSelectOptions, isUndefinedOrNull, isSelectValueValid  } from '@/validators'
 import BaseButton from './BaseButton.vue'
 
 // defineProps(['selected', 'options', 'placeholder'])
 const props = defineProps({
-  selected: Number,
+  selected: [String, Number],
   placeholder: {
     required: true,
     type: String
@@ -44,12 +44,16 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
-  select: isNumberOrNull
+  select: isSelectValueValid
 })
 
 const isNotSelected = computed(() => {
   return isUndefinedOrNull(props.selected)
 })
+
+function select(value){
+  emit('select', normalizeSelectValue(value))
+}
 </script>
 
 <style lang="scss" scoped></style>
